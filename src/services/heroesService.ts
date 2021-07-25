@@ -6,6 +6,7 @@ interface Data {
   readonly searchName?: string;
 }
 
+const URL_BASE = 'https://gateway.marvel.com/v1/public/characters'
 const API_KEY_PRIV = process.env.REACT_APP_API_KEY_PRIV;
 const API_KEY_PUB = process.env.REACT_APP_API_KEY_PUB;
 
@@ -25,7 +26,7 @@ export const requestHeroes = async (props: Data) => {
   const timeStamp = parameters.timeStamp();
   const hash = parameters.hash(timeStamp);
 
-  const url = `${process.env.REACT_APP_URL_BASE}?ts=${timeStamp}${nameStartsWith}&orderBy=name&offset=${pageOffset}&limit=${limitItemsPage}&apikey=${API_KEY_PUB}&hash=${hash}`;
+  const url = `${URL_BASE}?ts=${timeStamp}${nameStartsWith}&orderBy=name&offset=${pageOffset}&limit=${limitItemsPage}&apikey=${API_KEY_PUB}&hash=${hash}`;
 
   const request = await fetch(url);
   
@@ -38,7 +39,7 @@ export const requestHero = async (id: number) => {
   const timeStamp = parameters.timeStamp();
   const hash = parameters.hash(timeStamp);
 
-  const url = `${process.env.REACT_APP_URL_BASE}/${id}?ts=${timeStamp}&apikey=${API_KEY_PUB}&hash=${hash}`;
+  const url = `${URL_BASE}/${id}?ts=${timeStamp}&apikey=${API_KEY_PUB}&hash=${hash}`;
   
   const request = await fetch(url);
   
